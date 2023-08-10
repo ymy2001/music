@@ -1,0 +1,31 @@
+#mysql配置
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/music
+    username: root
+    password: 550002
+  #文件上传限制
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 100MB
+#mybatis配置
+mybatis:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    map-underscore-to-camel-case: true
+
+#阿里云配置文件
+aliyun:
+  oss:
+    file:
+      endpoint: https://oss-cn-beijing.aliyuncs.com
+      KeyId: LTAI5tKWM2co3x52uFtRvsZy
+      KeySecret: PvXajAMuJvQAYsNsBaySk5Qq6ZkH8G
+      bucketName: ymyaccbucket
+
+#spring事务管理日志
+logging:
+  level:
+    org.springframework.jdbc.support.JdbcTransactionManager: debug
