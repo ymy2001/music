@@ -49,22 +49,24 @@ public class LoginCheckIntercepter implements HandlerInterceptor {
                 return false;
             }
             //解析jwt令牌
-            //String userId;
             try {
                 JwtUtils.parseJWT(jwt);
                 Claims claims = Jwts.parser()
                         .setSigningKey(signKey)
                         .parseClaimsJws(jwt)
                         .getBody();
-                //System.out.println(claims);
-                //使用get()方法获取username的值
-                //System.out.println(jwt);
+                //获取当前请求的token的用户名
                 String username = (String) claims.get("username");
-                //System.out.println(claims.get("id"));
+                //放入线程
                 BaseContext.setCurrentName(username);
-                //BaseContext.setCurrentId(id);
-                //System.out.println(username);
-                //log.info("用户id{}",userId);
+                //获取当前id
+                Integer ids = (Integer) claims.get("id");
+                log.info("这是用户id{}",ids);
+                //放入线程
+                Long id=ids.longValue();
+                BaseContext.setCurrentId(id);
+                //打印测试
+                log.info("测试：{}",BaseContext.getCurrentId());
             } catch (Exception e) {
                 e.printStackTrace();
                 log.info("解析失败！");
