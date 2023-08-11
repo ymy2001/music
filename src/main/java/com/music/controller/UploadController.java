@@ -5,6 +5,8 @@ import com.music.pojo.Result;
 import com.music.pojo.User;
 import com.music.service.UserService;
 import com.music.utils.AliOSSUtils;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,7 @@ import java.time.LocalDateTime;
 
 @Slf4j
 @RestController
+@Api(tags = "文件上传")
 public class UploadController {
     @Autowired
     private AliOSSUtils aliOSSUtils;
@@ -25,6 +28,7 @@ public class UploadController {
     /*
     * 上传文件文件
     * 更新数据库*/
+    @ApiOperation("上传头像")
     @PostMapping("/upload")
     public Result upload(MultipartFile image) throws IOException {
         log.info("文件上传{}",image.getOriginalFilename());
