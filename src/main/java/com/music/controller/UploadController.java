@@ -32,6 +32,10 @@ public class UploadController {
     @PostMapping("/upload")
     public Result upload(MultipartFile image) throws IOException {
         log.info("文件上传{}",image.getOriginalFilename());
+        long size = image.getSize();
+        if (size>=3 * 1024 * 1024){
+            return Result.error("ERROR");
+        }
         //调用阿里云oss上传文件
         String url = aliOSSUtils.upload(image);
         //System.out.println(url);
