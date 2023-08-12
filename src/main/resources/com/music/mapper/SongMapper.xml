@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.music.mapper.SongMapper">
+    <!--使用动态查询实现分页-->
+    <select id="getSong" resultType="com.music.pojo.Music">
+        select * from song
+        <where>
+            <if test="search!=null">music_name like concat('%',#{search},'%')</if>
+            <if test="search!=null">or music_singer like concat('%',#{search},'%')</if>
+        </where>
+    </select>
+</mapper>
