@@ -12,4 +12,8 @@ public interface SongService {
     /*
     * 查找全部歌曲*/
     PageBean getSong(Integer page, Integer pageSize,String search);
+
+    /*
+    * 查询全部的歌曲*/
+    List<Music> getAll(String search);
 }

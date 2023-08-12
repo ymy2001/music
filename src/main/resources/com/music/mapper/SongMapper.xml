@@ -11,4 +11,11 @@
             <if test="search!=null">or music_singer like concat('%',#{search},'%')</if>
         </where>
     </select>
+    <select id="getAll" resultType="com.music.pojo.Music">
+        select * from song
+        <where>
+            <if test="search!=null">music_name like concat('%',#{search},'%')</if>
+            <if test="search!=null">or music_singer like concat('%',#{search},'%')</if>
+        </where>
+    </select>
 </mapper>

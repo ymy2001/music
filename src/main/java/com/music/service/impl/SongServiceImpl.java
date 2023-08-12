@@ -33,4 +33,11 @@ public class SongServiceImpl implements SongService {
         PageBean pageBean=new PageBean(p.getTotal(),p.getResult());
         return pageBean;
     }
+
+    /*
+    * 获取全部的歌曲，也许也有条件*/
+    @Override
+    public List<Music> getAll(String search) {
+        return songMapper.getAll(search);
+    }
 }
