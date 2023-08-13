@@ -18,7 +18,7 @@ public class SongServiceImpl implements SongService {
     /*
     * 实现分页查询*/
     @Override
-    public PageBean getSong(Integer page, Integer pageSize,String search) {
+    public PageBean getSong(Integer page, Integer pageSize,String search,Integer type) {
         //获取总记录数
         //Long count= songMapper.count();
         //获取分页结果列表
@@ -27,7 +27,7 @@ public class SongServiceImpl implements SongService {
         //设置分页参数
         PageHelper.startPage(page,pageSize);
         //执行查询
-        List<Music> songList = songMapper.getSong(search);
+        List<Music> songList = songMapper.getSong(search,type);
         Page<Music> p=(Page<Music>) songList;
         //封装结果
         PageBean pageBean=new PageBean(p.getTotal(),p.getResult());

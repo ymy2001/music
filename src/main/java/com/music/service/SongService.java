@@ -11,7 +11,7 @@ import java.util.List;
 public interface SongService {
     /*
     * 查找全部歌曲*/
-    PageBean getSong(Integer page, Integer pageSize,String search);
+    PageBean getSong(Integer page, Integer pageSize,String search,Integer type);
 
     /*
     * 查询全部的歌曲*/

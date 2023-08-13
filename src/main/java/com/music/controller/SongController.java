@@ -22,16 +22,18 @@ import java.util.List;
 public class SongController {
     @Autowired
     private SongService songService;
-    @ApiOperation("查找歌曲分页")
+    @ApiOperation("查找歌曲，分页")
     @GetMapping("/list")
     public Result getSong(
             @RequestParam(defaultValue = "1") Integer page,
             @RequestParam(defaultValue = "10")  Integer pageSize,
-            String search)
+            String search,
+            Integer type)
     {
         log.info("音乐数据查询:{}",search);
         log.info("分页参数：{},{}",page,pageSize);
-        PageBean pageBean=songService.getSong(page,pageSize,search);
+        log.info("音乐类型：{}",type);
+        PageBean pageBean=songService.getSong(page,pageSize,search,type);
         return Result.success(pageBean);
     }
 

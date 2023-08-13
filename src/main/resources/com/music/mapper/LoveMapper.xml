@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.music.mapper.LoveMapper">
+
+    <select id="getById" resultType="com.music.pojo.LoveMusicVO">
+        select user_id,song.id as id,music_name,music_singer,music_type,music_text,image_url,music_url
+        from lovemusic
+                 left join song
+                           on song.id=lovemusic.music_id
+        where user_id=#{userId}
+    </select>
+</mapper>

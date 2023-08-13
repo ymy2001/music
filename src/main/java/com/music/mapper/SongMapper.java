@@ -19,7 +19,7 @@ public interface SongMapper {
     /*
     * 设置为动态查询*/
     //@Select("select * from song")
-    List<Music> getSong(String search);
+    List<Music> getSong(String search,Integer type);
 
     /*
     * 查询全部的数据*/
