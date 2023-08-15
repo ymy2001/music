@@ -1,3 +1,5 @@
+server:
+  port: 9090
 #mysql配置
 spring:
   datasource:

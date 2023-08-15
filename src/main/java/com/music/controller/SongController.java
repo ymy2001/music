@@ -1,12 +1,13 @@
 package com.music.controller;
 
-import com.music.pojo.Music;
-import com.music.pojo.PageBean;
-import com.music.pojo.Result;
+import com.music.context.BaseContext;
+import com.music.pojo.*;
 import com.music.service.SongService;
+import com.music.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,6 +23,8 @@ import java.util.List;
 public class SongController {
     @Autowired
     private SongService songService;
+    @Autowired
+    private UserService userService;
     @ApiOperation("查找歌曲，分页")
     @GetMapping("/list")
     public Result getSong(
@@ -30,7 +33,7 @@ public class SongController {
             String search,
             Integer type)
     {
-        log.info("音乐数据查询:{}",search);
+        log.info("音乐模糊查询:{}",search);
         log.info("分页参数：{},{}",page,pageSize);
         log.info("音乐类型：{}",type);
         PageBean pageBean=songService.getSong(page,pageSize,search,type);
@@ -41,7 +44,7 @@ public class SongController {
     @GetMapping
     public Result allSong(String search){
         log.info("全部查询，条件:{}",search);
-        List<Music> musicList=songService.getAll(search);
+        HomePageVO musicList=songService.getAll(search);
         return Result.success(musicList);
     }
 }

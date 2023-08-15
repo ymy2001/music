@@ -10,7 +10,7 @@ import java.util.Map;
 public class JwtUtils {
 
     private static final String signKey = "music";
-    private static final Long expire = 43200000L;
+    private static final Long expire = 1296000000L;
 
     /**
      * 生成JWT令牌
