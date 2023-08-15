@@ -33,6 +33,7 @@ public class UserServiceImpl implements UserService {
     public void insert(User user) {
         user.setCreateTime(LocalDateTime.now());
         user.setUpdateTime(LocalDateTime.now());
+        user.setImage("https://tupian.qqw21.com/article/UploadPic/2021-1/20211722215735941.jpg");
         userMapper.insert(user);
     }
 

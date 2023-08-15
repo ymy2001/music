@@ -1,5 +1,6 @@
 package com.music.service;
 
+import com.music.pojo.HomePageVO;
 import com.music.pojo.Music;
 import com.music.pojo.PageBean;
 import com.music.pojo.Result;
@@ -15,5 +16,5 @@ public interface SongService {
 
     /*
     * 查询全部的歌曲*/
-    List<Music> getAll(String search);
+    HomePageVO getAll(String search);
 }
