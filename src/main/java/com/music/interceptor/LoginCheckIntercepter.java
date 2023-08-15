@@ -35,6 +35,18 @@ public class LoginCheckIntercepter implements HandlerInterceptor {
             log.info("注册操作");
             return true;
         }
+        if(url.contains("doc")){
+            return true;
+        }
+        if(url.contains("favicon")){
+            return true;
+        }
+        if(url.contains("webjars")){
+            return true;
+        }
+        if(url.contains("swagger")){
+            return true;
+        }
         if (!req.getMethod().equals("OPTIONS")) {
             //获取请求头
             jwt = req.getHeader("Authorization");

@@ -1,6 +1,5 @@
 package com.music.controller;
 
-import com.music.pojo.Register;
 import com.music.pojo.Result;
 import com.music.pojo.User;
 import com.music.service.UserService;
@@ -9,9 +8,9 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
@@ -29,6 +28,11 @@ public class LoginController {
     @ApiOperation("“用户登录")
     public Result login(@RequestBody User user){
         log.info("用户登录{}",user);
+        //获取登录密码
+        String password = user.getPassword();
+        password= DigestUtils.md5DigestAsHex(password.getBytes());
+        log.info("加密后：{}",password);
+        user.setPassword(password);
         User e=userService.login(user);
         //登录成功下发令牌
         if (e!=null){
@@ -47,6 +51,10 @@ public class LoginController {
     public Result register(@RequestBody User user){
         log.info("用户注册{}",user);
         String name=user.getUsername();
+        //获取密码并加密处理
+        String password = user.getPassword();
+        password= DigestUtils.md5DigestAsHex(password.getBytes());
+        user.setPassword(password);
         User user_name=userService.register(name);
         log.info("查询到的用户{}",user_name);
         if (user_name==null){
