@@ -1,6 +1,7 @@
 package com.music.controller;
 
 import com.music.context.BaseContext;
+import com.music.pojo.LoveCheckVO;
 import com.music.pojo.LoveMusicVO;
 import com.music.pojo.PageBean;
 import com.music.pojo.Result;
@@ -37,15 +38,45 @@ public class LoveController {
     /*
     * 添加收藏*/
     @ApiOperation("添加收藏")
-    @PostMapping("/add")
-    public Result addLove(){
-        return null;
+    @GetMapping("/add")
+    public Result addLove(Integer musicId){
+        Long userId = BaseContext.getCurrentId();
+        log.info("添加收藏用户id：{}，音乐id：{}",userId,musicId);
+        //判断数据是否存在
+        LoveCheckVO loveCheckVO=loveService.check(userId,musicId);
+        if (loveCheckVO==null){
+            loveService.addLove(userId,musicId);
+            return Result.success(1);
+        }
+        return Result.error("收藏失败");
     }
     /*
     * 取消收藏*/
-    @DeleteMapping("/delete")
+    @GetMapping ("/delete")
     @ApiOperation("取消收藏")
-    public Result cancelLove(){
-        return null;
+    public Result cancelLove(Integer musicId){
+        Long userId = BaseContext.getCurrentId();
+        log.info("添加收藏用户id：{}，音乐id：{}",userId,musicId);
+        //判断数据是否存在
+        LoveCheckVO loveCheckVO=loveService.check(userId,musicId);
+        if (loveCheckVO!=null){
+            loveService.remove(userId,musicId);
+            return Result.success(0);
+        }
+        return Result.error("取消收藏失败");
     }
+    /*
+    * 查询收藏状态*/
+    @ApiOperation("查询收藏状态")
+    @GetMapping("/check")
+    public Result check(Integer musicId){
+        Long userId = BaseContext.getCurrentId();
+        log.info("当前用户id：{}，当前歌曲：{}",userId,musicId);
+        LoveCheckVO loveCheckVO=loveService.check(userId,musicId);
+        if (loveCheckVO==null){
+            return Result.success(0);
+        }
+        return Result.success(1);
+    }
+
 }
